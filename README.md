@@ -1,1 +1,1 @@
-自用OpenWrt编译，源码来自于lede。
+自用OpenWrt编译，源码使用lede。

@@ -82,7 +82,7 @@ jobs:
     - name: Clone source code
       run: |
         df -hT $GITHUB_WORKSPACE
-        git clone $REPO_URL -b $REPO_BRANCH openwrt --depth 1
+        git clone $REPO_URL --depth=1 -b $REPO_BRANCH openwrt --depth 1
         cd openwrt
         echo "OPENWRT_PATH=$PWD" >> $GITHUB_ENV
         COMMIT_AUTHOR=$(git show -s --date=short --format="作者: %an")

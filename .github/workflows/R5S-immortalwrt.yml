@@ -57,8 +57,10 @@ jobs:
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
           # Set up compilation source code
-          REPO_URL="https://github.com/openwrt/openwrt"
-          REPO_BRANCH="main"
+          # REPO_URL="https://github.com/openwrt/openwrt"
+          REPO_URL="https://github.com/immortalwrt/immortalwrt"
+          # REPO_BRANCH="main"
+          REPO_BRANCH="master"
           TAGS_NAME="official"
           
 

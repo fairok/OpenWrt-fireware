@@ -12,10 +12,10 @@ on:
     - cron: 0 21 * * *
 
 env:
-  FEEDS_CONF: config/immortalwrt/feeds.conf.default
-  CONFIG_FILE: config/immortalwrt/r5s.config
-  DIY_P1_SH: config/immortalwrt/diy-part1.sh
-  DIY_P2_SH: config/immortalwrt/diy-part2.sh
+  FEEDS_CONF: config/openwrt/feeds.conf.default
+  CONFIG_FILE: config/openwrt/r5s.config
+  DIY_P1_SH: config/openwrt/diy-part1.sh
+  DIY_P2_SH: config/openwrt/diy-part2.sh
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
@@ -52,27 +52,16 @@ jobs:
           sudo timedatectl set-timezone "${TZ}"
           echo "status=success" >> ${GITHUB_OUTPUT}
 
-      - name: Set up ccache
-        run: |
-          export PATH="/usr/lib/ccache:$PATH"
-          export CC="ccache gcc"
-          export CXX="ccache g++"
-          echo "CC=${CC}" >> $GITHUB_ENV
-          echo "CXX=${CXX}" >> $GITHUB_ENV
-
       - name: Clone source code [ ${{ inputs.source_branch }} ]
         id: codes
         working-directory: /workdir
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
           # Set up compilation source code
-          # REPO_URL="https://github.com/openwrt/openwrt"
-          REPO_URL="https://github.com/immortalwrt/immortalwrt"
-          # REPO_BRANCH="main"
-          REPO_BRANCH="master"
+          REPO_URL="https://github.com/openwrt/openwrt"
+          REPO_BRANCH="main"
           TAGS_NAME="official"
           
-
           # Clone source code
           git clone -q --single-branch --depth=1 --branch=${REPO_BRANCH} ${REPO_URL} openwrt
           ln -sf /workdir/openwrt ${GITHUB_WORKSPACE}/openwrt

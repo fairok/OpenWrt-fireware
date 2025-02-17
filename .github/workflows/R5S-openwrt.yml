@@ -3,7 +3,7 @@
 # Description: Build OpenWrt
 #============================================================================================
 
-name: R5S-immortalwrt
+name: R5S-openwrt
 
 on:
   repository_dispatch:
